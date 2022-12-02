@@ -1,8 +1,5 @@
 name: Docker Image CI
 
-env:
-  imageName: localhost:5000/github-runner:$(date +%s)
-
 on:
   push:
     branches: [ "main" ]
@@ -10,11 +7,10 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: [self-hosted, linux, x64]
-
+    env:
+      imageName: localhost:5000/github-runner:${{date +%s}}
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
