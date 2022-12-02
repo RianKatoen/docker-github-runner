@@ -9,11 +9,9 @@ on:
 jobs:
   build:
     runs-on: [self-hosted, linux, x64]
-    env:
-      imageName: localhost:5000/github-runner:$(date +%s)
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $(env.imageName)
+      run: docker build . --file Dockerfile --tag localhost:5000/github-runner:$(date +%s)
     - name: Push the Docker image
-      run: docker image push ${{env.imageName}}
+      run: docker image push localhost:5000/github-runner:$(date +%s)
